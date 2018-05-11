@@ -12,11 +12,11 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity{
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    List<urlContact>urlList=new ArrayList<>();
+    DatabaseHandler db;
 
 
     @Override
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        db = new DatabaseHandler(getApplicationContext());
 
         viewPager =  findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -38,14 +39,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "Translate");
+        adapter.addFragment(new TwoFragment(), "home");
+
+
+
+
+
+        urlList =  db.getAllContacts();
+
+
+        for (urlContact url:urlList) {
+
+            adapter.addFragment(new OneFragment(url.getUrl()), url.getName());
+
+        }
+
+       /* adapter.addFragment(new OneFragment(), "Translate");
         adapter.addFragment(new TwoFragment(), "Medium");
         adapter.addFragment(new ThreeFragment(), "StackOverFlow");
         adapter.addFragment(new FourFragment(), "Github");
         adapter.addFragment(new FiveFragment(), "Facebook");
         adapter.addFragment(new SixFragment(), "TransferMarkt");
-
+*/
         viewPager.setAdapter(adapter);
+
+
+
     }
 
 
@@ -81,5 +100,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+  /*  @Override
+    public void onBackPressed() {
+OneFragment oneFragment = null;
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            //super.onBackPressed();
+            //additional code
+            Toast.makeText(MainActivity.this,"asdf",Toast.LENGTH_SHORT).show();
+            oneFragment.webView.goBack();
+
+        } else {
+            getFragmentManager().popBackStack();
+        }*/
+
+    //}
 
 }
