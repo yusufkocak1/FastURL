@@ -1,13 +1,13 @@
 package com.yube.fasturl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -48,6 +48,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+
+
 
     /**
      * All CRUD(Create, Read, Update, Delete) Operations
@@ -116,8 +118,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(url, contact.getUrl());
 
         // updating row
-        return db.update(TABLE_CONTACTS, values, id + " = ?",
+         db.update(TABLE_CONTACTS, values, id + " = ?",
                 new String[] { String.valueOf(contact.getId()) });
+        db.close();
+        return 1;
+
     }
 
     // Deleting single contact
@@ -140,4 +145,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    public void changeSort(List<urlContact> urlList) {
+        for (urlContact urlContact : urlList
+             ) {
+            addContact(urlContact);
+
+        }
+
+    }
 }

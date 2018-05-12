@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff8800">
+    android:background="#fff">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             app:tabMode="scrollable"
             app:tabTextColor="#ffffff"
-            app:tabSelectedTextColor="#ff0000"
+            app:tabSelectedTextColor="@color/colorPrimary"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.AppBarLayout>
 
