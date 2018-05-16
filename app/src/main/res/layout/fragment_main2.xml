@@ -52,16 +52,17 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="250dp"
-                android:layout_margin="10dp"
-                android:background="#DDDDDD">
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="10dp"
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Reklam" />
+                android:layout_gravity="center_horizontal"
+                android:background="#DDDDDD"
+                android:id="@+id/adView"
+                android:orientation="vertical">
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -69,20 +70,17 @@
                 android:layout_height="40dp"
                 android:gravity="right|center">
 
-                <Button
-                    android:id="@+id/openalert"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/colorPrimary"
-                    android:elevation="10dp"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Tab add"
-                    android:textColor="#fff"
-                    android:textSize="10sp"
-                    android:theme="@drawable/layoutshadowtheme" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Tab List:"/>
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aswitch"
+                    android:checked="false"
+                    />
+
 
                 <Button
                     android:id="@+id/savesort"
@@ -94,7 +92,22 @@
                     android:elevation="10dp"
                     android:gravity="center"
                     android:padding="5dp"
+                    android:enabled="false"
                     android:text="save order"
+                    android:textColor="#fff"
+                    android:textSize="10sp"
+                    android:theme="@drawable/layoutshadowtheme" />
+                <Button
+                    android:id="@+id/openalert"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/colorPrimary"
+                    android:elevation="10dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Tab add"
                     android:textColor="#fff"
                     android:textSize="10sp"
                     android:theme="@drawable/layoutshadowtheme" />
@@ -111,6 +124,7 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/tablist"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="500dp"
                     android:layout_margin="7dp"></android.support.v7.widget.RecyclerView>

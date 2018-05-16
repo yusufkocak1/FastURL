@@ -1,7 +1,10 @@
 package com.yube.fasturl;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -17,7 +20,9 @@ public class searchActivity extends AppCompatActivity {
     public WebView searchWebView;
     protected String url;
     protected DatabaseHandler db;
+    private SwipeRefreshLayout mySwipeRefreshLayout;
 
+    private ProgressDialog progressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,19 @@ public class searchActivity extends AppCompatActivity {
         searchWebView.loadUrl(url);
 
 
+
+
+        mySwipeRefreshLayout = this.findViewById(R.id.swipeContainer);
+
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        searchWebView.reload();
+                        mySwipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+        );
         searchWebView.setOnKeyListener(new View.OnKeyListener() {
 
 
@@ -91,4 +109,30 @@ public class searchActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private class MyWebViewClient extends WebViewClient {
+
+        @SuppressWarnings("deprecation")
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            progressDialog = new ProgressDialog(searchActivity.this);
+            progressDialog.setMessage("Lütfen Bekleyin ...");
+            progressDialog.show();
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            if(progressDialog!=null){
+                progressDialog.dismiss();
+            }
+        }
+    }
+
 }

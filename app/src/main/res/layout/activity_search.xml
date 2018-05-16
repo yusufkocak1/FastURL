@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.yube.fasturl.searchActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <WebView
         android:layout_width="match_parent"
@@ -13,5 +22,8 @@
         android:id="@+id/searchWebView">
 
     </WebView>
+    </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </android.support.constraint.ConstraintLayout>

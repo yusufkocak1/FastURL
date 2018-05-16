@@ -81,7 +81,8 @@ public class alert {
             @Override
             public void onClick(View v) {
                 if (mod == 2) {
-                    db.updateContact(urlContact);
+                   db.updateContact(new urlContact(urlContact.getId(),nameet.getText().toString(), spinner.getSelectedItem().toString() + urlet.getText().toString()));
+                  //  Log.e("asd",x+"");
                 } else {
                     db.addContact(new urlContact(nameet.getText().toString(), spinner.getSelectedItem().toString() + urlet.getText().toString()));
                 }

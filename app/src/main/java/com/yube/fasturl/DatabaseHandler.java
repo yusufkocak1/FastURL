@@ -110,18 +110,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Updating single contact
-    public int updateContact(urlContact contact) {
+    public void updateContact(urlContact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(name, contact.getName());
-        values.put(url, contact.getUrl());
-
-        // updating row
-         db.update(TABLE_CONTACTS, values, id + " = ?",
-                new String[] { String.valueOf(contact.getId()) });
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put(name, contact.getName());
+            cv.put(url, contact.getUrl());
+            String where = id +" = '"+ contact.getId() + "'";
+            db.update(TABLE_CONTACTS,cv,where,null);
+        }catch (Exception e){
+        }
         db.close();
-        return 1;
 
     }
 
